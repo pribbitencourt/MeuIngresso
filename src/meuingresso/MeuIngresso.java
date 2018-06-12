@@ -1,9 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package meuingresso;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -11,11 +15,22 @@ package meuingresso;
  */
 public class MeuIngresso {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        System.out.println("Hello World");
+    
+    public static void main(String[] args) throws SQLException {
+        
+        Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery("SELECT * FROM sala;");
+        List<Sala> listaDeSala = new ArrayList<Sala>();
+        while(rs.next()){
+            Sala objSala =  new Sala(rs.getInt("id"),
+                                    rs.getInt("numero_assentos"),
+                                    rs.getString("numero_sala"),
+                                    rs.getString("tipoSala")
+            );
+            listaDeSala.add(objSala);
+        }
+        System.out.println(listaDeSala.size());
     }
     
 }

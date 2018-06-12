@@ -6,11 +6,18 @@ package meuingresso;
  */
 public class Sala {
     
-    private int id;
-    private int numeroAssentos;
+    private Integer id;
+    private Integer numeroAssentos;
     private String numeroSala;
     private String tipoSala;
-
+    
+    public Sala(int id, int numeroAssentos, String numeroSala, String tipoSala){
+        this.id = id;
+        this.numeroAssentos = numeroAssentos;
+        this.numeroSala = numeroSala;
+        this.tipoSala = tipoSala;
+    }
+    
     public int getId() {
         return id;
     }
@@ -41,8 +48,5 @@ public class Sala {
 
     public void setTipoSala(String tipoSala) {
         this.tipoSala = tipoSala;
-    }
-    
-    
-    
+    }   
 }
