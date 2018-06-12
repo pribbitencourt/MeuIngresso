@@ -9,6 +9,14 @@ import meuingresso.Pessoa;
  *
  * @author priscillabittencourt
  */
+
+/**A classe funcionario possibilita instancear funcionarios e extende sua funcionalidade
+ * a partir da super-classe pessoa. Possui atributos, e métodos diversos para acessar
+ * esses atributos sempre utilizando-se dos principios de POO como por exemplo
+ * encapsulamento
+ * 
+ * @see pessoa
+ */
 public class Funcionario extends Pessoa{
     
     private String turno;
@@ -16,14 +24,13 @@ public class Funcionario extends Pessoa{
     private float salario;
     private Date dataContratacao = null;
 
-    
-    /**A classe funcionario possibilita instancear funcionarios e extende sua funcionalidade
-     * a partir da super-classe pessoa. Possui atributos, e métodos diversos para acessar
-     * esses atributos sempre utilizando-se dos principios de POO como por exemplo
-     * encapsulamento
-     * 
-     * @see pessoa
-     */
+    public Funcionario(String turno, String funcao, float salario, int id, String nome, String cpf, String email, String telefone, Date dataNascimento) {
+        super(id, nome, cpf, email, telefone, dataNascimento);
+        this.turno = turno;
+        this.funcao = funcao;
+        this.salario = salario;
+    }
+
     @Override
     public String toString() {
         return  "Turno" + this.getTurno()+ "\n"

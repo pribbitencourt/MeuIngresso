@@ -13,6 +13,17 @@ public abstract class Pessoa {
     private String telefone;
     private Date dataNascimento = null;
 
+    public Pessoa(int id, String nome, String cpf, String email, String telefone, Date dataNascimento) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.telefone = telefone;
+        this.dataNascimento = dataNascimento;
+    }
+
+    
+    
     /**O metodo toString retorna um representação em formato de texto
      * do objeto Pessoa istanceado. Vale ressaltar que fizemos uma melhoria no
      * formato do retorno dos dados
