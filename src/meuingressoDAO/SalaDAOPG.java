@@ -30,9 +30,7 @@ public class SalaDAOPG implements SalaDAO {
             }
         } catch (SQLException e) {
             System.out.println("");
-        }
-        
-        
+        }   
     }
 
     @Override
