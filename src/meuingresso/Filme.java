@@ -18,6 +18,20 @@ public class Filme {
     private String legenda;
     private String idioma;
 
+    public Filme(int id, String titulo, String genero, String duracao, String produtora, String classificacao, String diretor, String atoresPrincipais, String sinopse, String legenda, String idioma) {
+        this.id = id;
+        this.titulo = titulo;
+        this.genero = genero;
+        this.duracao = duracao;
+        this.produtora = produtora;
+        this.classificacao = classificacao;
+        this.diretor = diretor;
+        this.atoresPrincipais = atoresPrincipais;
+        this.sinopse = sinopse;
+        this.legenda = legenda;
+        this.idioma = idioma;
+    }
+
     public int getId() {
         return id;
     }
