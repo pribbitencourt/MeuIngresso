@@ -7,6 +7,7 @@ package meuingressoDAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
@@ -27,13 +28,22 @@ alter table Pessoa add primary key (id);
 public class PessoaDAOPG implements PessoaDAO{
 
     @Override
-    public void create(String nome, String cpf, String email, String telefone, Date dataNascimento) throws SQLException {
-        
-        Connection conn = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/rrieiro", "postgres", "aluno");
-        Statement st = conn.createStatement();
-        String sql = String.format("INSERT INTO Pessoa(nome, cpf, email, telefone, dataNascimento) values ('%s', '%s', '%s', '%s', '%s');",
-                nome, cpf, email, telefone, dataNascimento.toString());
-        st.execute(sql);
+    public void create(Pessoa p) throws SQLException {
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
+            PreparedStatement pstm = conn.prepareStatement("INSERT INTO pessoa(id, cpf, dataNascimento,email, nome, telefone) VALUES (?,?,?,?,?,?)");
+            pstm.setInt(1, p.getId());
+            pstm.setString(2, p.getCpf());
+            pstm.setString(3, p.getDataNascimento());
+            pstm.setString(4, p.getEmail());
+            pstm.setString(5, p.getNome());
+            pstm.setString(6, p.getTelefone());
+            if(!pstm.execute()){
+                throw new SQLException();
+            }
+        } catch (SQLException e) {
+            System.out.println("");
+        }
     }
 
     @Override

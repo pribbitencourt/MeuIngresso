@@ -14,7 +14,7 @@ import meuingresso.Cliente;
  * @author Aluno
  */
 public interface ClienteDAO {
-    public void create(String numeroSala)throws SQLException;
+    public void create(Cliente c)throws SQLException;
     public List<Cliente> retrieve() throws SQLException;
     public void update(Cliente c) throws SQLException;
     public void delete(Cliente c) throws SQLException;    

@@ -16,7 +16,7 @@ import meuingresso.Pessoa;
  */
 public interface PessoaDAO {
 
-    public void create(String nome, String cpf, String email, String telefone, Date dataNascimento)throws SQLException;
+    public void create(Pessoa p)throws SQLException;
     public List<Pessoa> retrieve() throws SQLException;
     public void update(Pessoa p) throws SQLException;
     public void delete(Pessoa p) throws SQLException;    
