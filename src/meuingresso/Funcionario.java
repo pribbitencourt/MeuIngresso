@@ -23,12 +23,14 @@ public class Funcionario extends Pessoa{
     private String funcao;
     private float salario;
     private Date dataContratacao = null;
+    private int pessoa_id;
 
     public Funcionario(String turno, String funcao, float salario, int id, String nome, String cpf, String email, String telefone, Date dataNascimento) {
         super(id, nome, cpf, email, telefone, dataNascimento);
         this.turno = turno;
         this.funcao = funcao;
         this.salario = salario;
+        this.pessoa_id = id;
     }
 
     @Override
