@@ -18,7 +18,10 @@ public class Filme {
     private String legenda;
     private String idioma;
 
-    public Filme(int id, String titulo, String genero, String duracao, String produtora, String classificacao, String diretor, String atoresPrincipais, String sinopse, String legenda, String idioma) {
+    public Filme(int id, String titulo, String genero, String duracao
+            , String produtora, String classificacao, String diretor
+            , String atoresPrincipais, String sinopse, String legenda
+            , String idioma) {
         this.id = id;
         this.titulo = titulo;
         this.genero = genero;
@@ -119,4 +122,25 @@ public class Filme {
     public void setIdioma(String idioma) {
         this.idioma = idioma;
     }
+    /**O metodo toString retorna um representação em formato de texto
+     * do objeto Pessoa istanceado. Vale ressaltar que fizemos uma melhoria no
+     * formato do retorno dos dados
+     * 
+     * @return String - Cadeia de caracteres contendo os atributos do Pessoa instanceado.
+     */
+    @Override
+    public String toString() {
+        return  "\n Id: " + this.getId() + "\n"
+                +"Titulo: " + this.getTitulo()+ "\n"
+                +"Sinopse: " + this.getSinopse()+ "\n"
+                + "Produtora: " + this.getProdutora()+ "\n" 
+                + "Legenda: " + this.getLegenda()+ "\n"
+                + "Idioma: " + this.getIdioma()+ "\n"
+                + "Genero: " + this.getGenero()+ "\n"
+                + "Duracao: " + this.getDuracao()+ "\n"
+                + "Diretor: " + this.getDiretor()+ "\n"
+                + "Classificação: " + this.getClassificacao()+ "\n"
+                + "Atores Principais: " + this.getAtoresPrincipais()+ "\n";
+    }
+    
 }

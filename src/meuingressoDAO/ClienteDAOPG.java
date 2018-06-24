@@ -34,7 +34,7 @@ public class ClienteDAOPG implements ClienteDAO {
             PreparedStatement pstm = conn.prepareStatement("INSERT INTO cliente("
                     + "id"
                     + ", cpf"
-                    + ", dataNascimento"
+                    + ", \"dataNascimento\""
                     + ", email"
                     + ", nome"
                     + ", telefone) VALUES ("
@@ -45,11 +45,10 @@ public class ClienteDAOPG implements ClienteDAO {
             pstm.setString(4, c.getEmail());
             pstm.setString(5, c.getNome());
             pstm.setString(6, c.getTelefone());
-            if(!pstm.execute()){
-                throw new SQLException();
-            }
+            pstm.execute();
+            System.out.println("Cliente cadastrado com sucesso");
         } catch (SQLException e) {
-            System.out.println("");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -61,12 +60,12 @@ public class ClienteDAOPG implements ClienteDAO {
         ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         while(rsCliente.next()){
-            int id = rsCliente.getInt("1");
-            String cpf = rsCliente.getString("2");
-            String dataNascimento = rsCliente.getString("3");
-            String email = rsCliente.getString("4");
-            String nome = rsCliente.getString("5"); 
-            String telefone = rsCliente.getString("5"); 
+            int id = rsCliente.getInt("id");
+            String cpf = rsCliente.getString("cpf");
+            String dataNascimento = rsCliente.getString("dataNascimento");
+            String email = rsCliente.getString("email");
+            String nome = rsCliente.getString("nome"); 
+            String telefone = rsCliente.getString("telefone"); 
             Date dataNascimentoFormatada = null;
             try {
                 dataNascimentoFormatada = formato.parse(dataNascimento);
@@ -83,21 +82,19 @@ public class ClienteDAOPG implements ClienteDAO {
          try {
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
-            PreparedStatement pstm = conn.prepareStatement("UPDATE cliente SET"
-                    + "(cpf = ?, dataNascimento = ?,email = ?, nome = ?, telefone = ?) "
-                    + "WHERE id = ?");
+            PreparedStatement pstm = conn.prepareStatement("UPDATE cliente SET "
+                    + "cpf = ?, \"dataNascimento\" = ?, email = ?, nome = ?, telefone = ? "
+                    + " WHERE id = ?;");
             pstm.setString(1, c.getCpf());
-            pstm.setDate(2, (java.sql.Date) formato.parse(c.getDataNascimento()));
+            pstm.setString(2, c.getDataNascimento());
             pstm.setString(3, c.getEmail());
             pstm.setString(4, c.getNome());
             pstm.setString(5, c.getTelefone());
-            if(!pstm.execute()){
-                throw new SQLException();
-            }
+            pstm.setInt(6, c.getId());
+            pstm.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("");
-        } catch (ParseException ex) {
-            Logger.getLogger(ClienteDAOPG.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(e.getErrorCode());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -105,13 +102,11 @@ public class ClienteDAOPG implements ClienteDAO {
     public void delete(Cliente c) throws SQLException {
         try {
             Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
-            PreparedStatement pstm = conn.prepareStatement("DELETE * FROM funcionario WHERE id = ?"); 
+            PreparedStatement pstm = conn.prepareStatement("DELETE FROM cliente WHERE id = ?"); 
             pstm.setInt(1, c.getId());
-            if(!pstm.execute()){
-                throw new SQLException();
-            }
+            pstm.execute();
         } catch (SQLException e) {
-            System.out.println("");
+            System.out.println(e.getMessage());
         }
     }
     

@@ -36,11 +36,9 @@ public class PessoaDAOPG implements PessoaDAO{
             pstm.setString(4, p.getEmail());
             pstm.setString(5, p.getNome());
             pstm.setString(6, p.getTelefone());
-            if(!pstm.execute()){
-                throw new SQLException();
-            }
+            pstm.execute();
         } catch (SQLException e) {
-            System.out.println("");
+            System.out.println(e.getMessage());
         }
     }
 

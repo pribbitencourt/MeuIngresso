@@ -56,10 +56,8 @@ public abstract class Pessoa {
     public void setDataNascimento(String data) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            //Parsing the String
             this.dataNascimento = dateFormat.parse(data);
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
