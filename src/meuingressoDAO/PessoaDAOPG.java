@@ -29,7 +29,7 @@ public class PessoaDAOPG implements PessoaDAO{
     public void create(Pessoa p) throws SQLException {
         try {
             Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
-            PreparedStatement pstm = conn.prepareStatement("INSERT INTO pessoa(id, cpf, dataNascimento,email, nome, telefone) VALUES (?,?,?,?,?,?)");
+            PreparedStatement pstm = conn.prepareStatement("INSERT INTO pessoa(id, cpf, data_nascimento,email, nome, telefone) VALUES (?,?,?,?,?,?)");
             pstm.setInt(1, p.getId());
             pstm.setString(2, p.getCpf());
             pstm.setString(3, p.getDataNascimento());
@@ -54,7 +54,14 @@ public class PessoaDAOPG implements PessoaDAO{
 
     @Override
     public void delete(Pessoa p) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
+            PreparedStatement pstm = conn.prepareStatement("DELETE FROM pessoa WHERE id = ?"); 
+            pstm.setInt(1, p.getId());
+            pstm.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
     
 }

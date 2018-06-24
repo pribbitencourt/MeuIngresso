@@ -34,7 +34,7 @@ public class ClienteDAOPG implements ClienteDAO {
             PreparedStatement pstm = conn.prepareStatement("INSERT INTO cliente("
                     + "id"
                     + ", cpf"
-                    + ", \"dataNascimento\""
+                    + ", data_nascimento"
                     + ", email"
                     + ", nome"
                     + ", telefone) VALUES ("
@@ -55,14 +55,14 @@ public class ClienteDAOPG implements ClienteDAO {
     @Override
     public List<Cliente> retrieve() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
-        PreparedStatement pstm = conn.prepareStatement("SELECT id,cpf,\"dataNascimento\",email,nome,telefone FROM cliente");
+        PreparedStatement pstm = conn.prepareStatement("SELECT id,cpf,data_nascimento,email,nome,telefone FROM cliente");
         ResultSet rsCliente = pstm.executeQuery();
         ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         while(rsCliente.next()){
             int id = rsCliente.getInt("id");
             String cpf = rsCliente.getString("cpf");
-            String dataNascimento = rsCliente.getString("dataNascimento");
+            String dataNascimento = rsCliente.getString("data_nascimento");
             String email = rsCliente.getString("email");
             String nome = rsCliente.getString("nome"); 
             String telefone = rsCliente.getString("telefone"); 
@@ -83,7 +83,7 @@ public class ClienteDAOPG implements ClienteDAO {
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
             PreparedStatement pstm = conn.prepareStatement("UPDATE cliente SET "
-                    + "cpf = ?, \"dataNascimento\" = ?, email = ?, nome = ?, telefone = ? "
+                    + "cpf = ?, data_nascimento = ?, email = ?, nome = ?, telefone = ? "
                     + " WHERE id = ?;");
             pstm.setString(1, c.getCpf());
             pstm.setString(2, c.getDataNascimento());
@@ -105,6 +105,8 @@ public class ClienteDAOPG implements ClienteDAO {
             PreparedStatement pstm = conn.prepareStatement("DELETE FROM cliente WHERE id = ?"); 
             pstm.setInt(1, c.getId());
             pstm.execute();
+            PessoaDAOPG pdaopg = new PessoaDAOPG();
+            pdaopg.delete(c);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
