@@ -22,11 +22,11 @@ import meuingresso.Sessao;
 public class SessaoDAOPG implements SessaoDAO{    
     
     @Override
-    public void create(String nome) throws SQLException {
+    public void create(Sessao s) throws SQLException {
         try {
         Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
         Sessao s1 = new Sessao(1, "12/05/2018", "12/06/2018", "18:00");
-        PreparedStatement pstm = conn.prepareStatement("INSERT INTO sala("
+        PreparedStatement pstm = conn.prepareStatement("INSERT INTO sessao("
                 + "id, "
                 + "data_inicio,"
                 + "data_fim,"
@@ -68,7 +68,7 @@ public class SessaoDAOPG implements SessaoDAO{
         try {
             Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
             PreparedStatement pstm = conn.prepareStatement("UPDATE sessao SET "
-                    + "id = ?, datainicio = ?, datafim = ?,horario = ?");
+                    + "id = ?, data_inicio = ?, data_fim = ?,horario = ?");
             pstm.setInt(1, s.getId());
             pstm.setString(2, s.getDataInicio());
             pstm.setString(3, s.getDataFim());

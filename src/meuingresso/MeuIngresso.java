@@ -14,6 +14,7 @@ import java.util.List;
 import meuingressoDAO.ClienteDAOPG;
 import meuingressoDAO.FilmeDAOPG;
 import meuingressoDAO.FuncionarioDAOPG;
+import meuingressoDAO.SessaoDAOPG;
 
 /**
  *
@@ -79,9 +80,25 @@ public class MeuIngresso {
 //        FuncionarioDAOPG FuncionarioDAO = new FuncionarioDAOPG();
 //        FuncionarioDAO.update(func1);
 // DELETE
-        Funcionario func1 = new Funcionario("matutino", "caixa2", 500, 1, "Priscilla", "000.000.000-00", "a@a.com.br", "33230931", "10/10/1991", "10/10/1991");
-        FuncionarioDAOPG FuncionarioDAO = new FuncionarioDAOPG();
-        FuncionarioDAO.delete(func1);
+//        Funcionario func1 = new Funcionario("matutino", "caixa2", 500, 1, "Priscilla", "000.000.000-00", "a@a.com.br", "33230931", "10/10/1991", "10/10/1991");
+//        FuncionarioDAOPG FuncionarioDAO = new FuncionarioDAOPG();
+//        FuncionarioDAO.delete(func1);
+//SESSAO
+// CREATE
+//        Sessao sessao1 = new Sessao(1, "10/12/1991", "12/12/1991", "20:00");
+//        SessaoDAOPG SessaoDAO = new SessaoDAOPG();
+//        SessaoDAO.create(sessao1);
+// RETRIEVE
+//        SessaoDAOPG SessaoDAO = new SessaoDAOPG();
+//        System.out.println(SessaoDAO.retrieve());
+// UPDATE
+//        Sessao sessao1 = new Sessao(1, "10/10/1991", "12/10/1991", "19:00");
+//        SessaoDAOPG SessaoDAO = new SessaoDAOPG();
+//        SessaoDAO.update(sessao1);
+// DELETE
+//        Sessao sessao1 = new Sessao(1, "10/10/1991", "12/10/1991", "19:00");
+//        SessaoDAOPG SessaoDAO = new SessaoDAOPG();
+//        SessaoDAO.delete(sessao1);
     }
     
 }
