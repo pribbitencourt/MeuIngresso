@@ -13,13 +13,13 @@ public abstract class Pessoa {
     private String telefone;
     private Date dataNascimento = null;
 
-    public Pessoa(int id, String nome, String cpf, String email, String telefone, Date dataNascimento) {
+    public Pessoa(int id, String nome, String cpf, String email, String telefone, String dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.telefone = telefone;
-        this.dataNascimento = dataNascimento;
+        this.setDataNascimento(dataNascimento);
     }
 
     
@@ -54,7 +54,7 @@ public abstract class Pessoa {
      * @param data 
      */
     public void setDataNascimento(String data) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             this.dataNascimento = dateFormat.parse(data);
         } catch (ParseException e) {

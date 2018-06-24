@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Cliente extends Pessoa{
 
-    public Cliente(int id, String nome, String cpf, String email, String telefone, Date dataNascimento) {
+    public Cliente(int id, String nome, String cpf, String email, String telefone, String dataNascimento) {
         super(id, nome, cpf, email, telefone, dataNascimento);
     }
 

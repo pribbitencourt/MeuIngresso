@@ -3,6 +3,8 @@ package meuingresso;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,7 +17,7 @@ public class Sessao {
     private Date dataFim= null;
     private String horario;
     
-    public Sessao(int id, Date dataInicioString, Date dataFimString, String horario) throws ParseException{
+    public Sessao(int id, String dataInicioString, String dataFimString, String horario){
         this.id= id;
         this.setDataInicio(dataInicioString);
         this.setDataFim(dataFimString);
@@ -31,21 +33,32 @@ public class Sessao {
         this.id = id;
     }
 
-    public Date getDataInicio() {
-        return dataInicio;
+    public String getDataInicio() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(dataInicio);
     }
 
-    public void setDataInicio(Date dataInicio) throws ParseException {
-        
-        this.dataInicio = dataInicio;
+    public void setDataInicio(String dataInicio) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            this.dataInicio = dateFormat.parse(dataInicio);
+        } catch (ParseException ex) {
+            Logger.getLogger(Sessao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public Date getDataFim() {
-        return dataFim;
+    public String getDataFim() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(dataFim);
     }
 
-    public void setDataFim(Date dataFim) throws ParseException {
-        this.dataFim = dataFim;
+    public void setDataFim(String dataFim) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            this.dataFim = dateFormat.parse(dataFim);
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getHorario() {

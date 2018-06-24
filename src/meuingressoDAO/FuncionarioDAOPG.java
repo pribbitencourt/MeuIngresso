@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,42 +34,52 @@ public class FuncionarioDAOPG implements FuncionarioDAO {
                     + ", turno"
                     + ", funcao"
                     + ", salario"
-                    + ", dataContratacao) VALUES ("
+                    + ", data_contratacao) VALUES ("
                     + "?,?,?,?,?)");
             pstm.setInt(1, f.getId());
             pstm.setString(2, f.getTurno());
             pstm.setString(3, f.getFuncao());
             pstm.setFloat(4, f.getSalario());
-            pstm.setDate(5, (java.sql.Date) f.getDataContratacao());
-            if(!pstm.execute()){
-                throw new SQLException();
-            }
+            pstm.setString(5, f.getDataContratacao());
+            pstm.execute();
         } catch (SQLException e) {
-            System.out.println("");
+            System.out.println(e.getMessage());
         }
     }
 
     @Override
     public List<Funcionario> retrieve() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
-        PreparedStatement pstm = conn.prepareStatement("SELECT * FROM funcionario");
+        PreparedStatement pstm = conn.prepareStatement("SELECT id,"
+                + "turno,"
+                + "funcao,"
+                + "salario,"
+                + "data_contratacao "
+                + " FROM funcionario");
         ResultSet rsFuncionario = pstm.executeQuery();
         ArrayList<Funcionario> listaFuncionarios = new ArrayList<Funcionario>();
         while(rsFuncionario.next()){
-            int id = rsFuncionario.getInt("1");
-            String turno = rsFuncionario.getString("2");
-            String funcao = rsFuncionario.getString("3");
-            Float salario = rsFuncionario.getFloat("4");
-            Date dataContratacao = rsFuncionario.getDate("5"); 
+            int id = rsFuncionario.getInt("id");
+            String turno = rsFuncionario.getString("turno");
+            String funcao = rsFuncionario.getString("funcao");
+            Float salario = rsFuncionario.getFloat("salario");
+            String dataContratacao = rsFuncionario.getString("data_contratacao"); 
             
-            PreparedStatement pstmPessoa = conn.prepareStatement("select nome, cpf, email, telefone, \"dataNascimento\" from pessoa WHERE id = ?");
+            PreparedStatement pstmPessoa = conn.prepareStatement("select nome, "
+                    + "cpf, "
+                    + "email, "
+                    + "telefone, "
+                    + "data_nascimento "
+                    + "from pessoa WHERE id = ?");
+            pstmPessoa.setInt(1, id);
             ResultSet rsPessoa = pstmPessoa.executeQuery();
-            String nome = rsPessoa.getString("1");
-            String cpf = rsPessoa.getString("2");
-            String email = rsPessoa.getString("3");
-            String telefone = rsPessoa.getString("4");
-            Date datanasc = rsPessoa.getDate("5");
-            listaFuncionarios.add(new Funcionario(turno, funcao, salario, id, nome, cpf, email, telefone, datanasc, dataContratacao));
+            rsPessoa.next();
+            String nome = rsPessoa.getString("nome");
+            String cpf = rsPessoa.getString("cpf");
+            String email = rsPessoa.getString("email");
+            String telefone = rsPessoa.getString("telefone");
+            String datanasc = rsPessoa.getString("data_nascimento");
+            listaFuncionarios.add(new Funcionario(turno, funcao, salario, id, nome, cpf, email, telefone, datanasc, dataContratacao ));
         }
         return listaFuncionarios;
     }
@@ -78,18 +89,16 @@ public class FuncionarioDAOPG implements FuncionarioDAO {
         try {
             Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
             PreparedStatement pstm = conn.prepareStatement("UPDATE funcionario SET"
-                    + "(turno = ?, funcao = ?,salario = ?, dataContratacao = ?) "
+                    + " turno = ?, funcao = ?,salario = ?, data_contratacao = ?  "
                     + "WHERE id = ?");
             pstm.setString(1, f.getTurno());
             pstm.setString(2, f.getFuncao());
             pstm.setFloat(3, f.getSalario());
-            pstm.setDate(4, (java.sql.Date) f.getDataContratacao());
+            pstm.setString(4, f.getDataContratacao());
             pstm.setInt(5, f.getId());
-            if(!pstm.execute()){
-                throw new SQLException();
-            }
+            pstm.execute();
         } catch (SQLException e) {
-            System.out.println("");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -97,13 +106,13 @@ public class FuncionarioDAOPG implements FuncionarioDAO {
     public void delete(Funcionario f) throws SQLException {
         try {
             Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
-            PreparedStatement pstm = conn.prepareStatement("DELETE * FROM funcionario WHERE id = ?"); 
+            PreparedStatement pstm = conn.prepareStatement("DELETE FROM funcionario WHERE id = ?"); 
             pstm.setInt(1, f.getId());
             if(!pstm.execute()){
                 throw new SQLException();
             }
         } catch (SQLException e) {
-            System.out.println("");
+            System.out.println(e.getMessage());
         }
     }
     

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import meuingressoDAO.ClienteDAOPG;
 import meuingressoDAO.FilmeDAOPG;
+import meuingressoDAO.FuncionarioDAOPG;
 
 /**
  *
@@ -37,10 +38,10 @@ public class MeuIngresso {
 //                , "Pribb@gmail.com", "999721918", formato.parse("12/11/1991"));
 //          ClienteDAO.update(c1);
 // DELETE
-          ClienteDAOPG ClienteDAO = new ClienteDAOPG();
-          Cliente c1 = new Cliente(3, "Priscilla", "082.627.869-80"
-                , "Pribb@gmail.com", "999721918", formato.parse("12/11/1991"));
-          ClienteDAO.delete(c1);
+//          ClienteDAOPG ClienteDAO = new ClienteDAOPG();
+//          Cliente c1 = new Cliente(3, "Priscilla", "082.627.869-80"
+//                , "Pribb@gmail.com", "999721918", formato.parse("12/11/1991"));
+//          ClienteDAO.delete(c1);
 // FILME
 // CREATE
 //        Filme f1 = new Filme(1, "HP PF", "Aventura", "120min", "Warner", "12+", "JK Rowling", "Daniel,Emma,Ruppert", "Bla bla bla", "ingles, portugues, arabe", "ingles,portugues, arabe");
@@ -65,7 +66,22 @@ public class MeuIngresso {
 //                  "Bla bla bla", "ingles, portugues, arabe", 
 //                  "ingles,portugues, arabe");
 //          FilmeDAO.delete(f1);
-
+//FUNCIONARIO
+// CREATE
+//        Funcionario func1 = new Funcionario("matutino/vespertino", "caixa", 500, 1, "Arthur", "000.000.000-00", "a@a.com.br", "33230931", formato.parse("10/10/1991"), formato.parse("10/10/1991"));
+//        FuncionarioDAOPG FuncionarioDAO = new FuncionarioDAOPG();
+//        FuncionarioDAO.create(func1);
+// RETRIEVE
+//        FuncionarioDAOPG FuncionarioDAO = new FuncionarioDAOPG();
+//        System.out.println(FuncionarioDAO.retrieve());
+// UPDATE
+//        Funcionario func1 = new Funcionario("matutino", "caixa2", 500, 1, "Priscilla", "000.000.000-00", "a@a.com.br", "33230931", "10/10/1991", "10/10/1991");
+//        FuncionarioDAOPG FuncionarioDAO = new FuncionarioDAOPG();
+//        FuncionarioDAO.update(func1);
+// DELETE
+        Funcionario func1 = new Funcionario("matutino", "caixa2", 500, 1, "Priscilla", "000.000.000-00", "a@a.com.br", "33230931", "10/10/1991", "10/10/1991");
+        FuncionarioDAOPG FuncionarioDAO = new FuncionarioDAOPG();
+        FuncionarioDAO.delete(func1);
     }
     
 }

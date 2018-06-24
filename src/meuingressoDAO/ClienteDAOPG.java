@@ -58,7 +58,6 @@ public class ClienteDAOPG implements ClienteDAO {
         PreparedStatement pstm = conn.prepareStatement("SELECT id,cpf,data_nascimento,email,nome,telefone FROM cliente");
         ResultSet rsCliente = pstm.executeQuery();
         ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         while(rsCliente.next()){
             int id = rsCliente.getInt("id");
             String cpf = rsCliente.getString("cpf");
@@ -66,13 +65,7 @@ public class ClienteDAOPG implements ClienteDAO {
             String email = rsCliente.getString("email");
             String nome = rsCliente.getString("nome"); 
             String telefone = rsCliente.getString("telefone"); 
-            Date dataNascimentoFormatada = null;
-            try {
-                dataNascimentoFormatada = formato.parse(dataNascimento);
-            } catch (ParseException ex) {
-                Logger.getLogger(ClienteDAOPG.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            listaClientes.add(new Cliente(id, nome, cpf, email, telefone, dataNascimentoFormatada));
+            listaClientes.add(new Cliente(id, nome, cpf, email, telefone, dataNascimento));
         }
         return listaClientes;
     }

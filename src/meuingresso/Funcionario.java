@@ -26,13 +26,13 @@ public class Funcionario extends Pessoa{
     private int pessoa_id;
 
     public Funcionario(String turno, String funcao, float salario, int id, String nome
-            , String cpf, String email, String telefone, Date dataNascimento, Date dataContratacao) {
+            , String cpf, String email, String telefone, String dataNascimento, String dataContratacao) {
         super(id, nome, cpf, email, telefone, dataNascimento);
         this.turno = turno;
         this.funcao = funcao;
         this.salario = salario;
         this.pessoa_id = id;
-        this.dataContratacao = dataContratacao;
+        this.setDataContratacao(dataContratacao);
     }
 
     @Override
@@ -47,8 +47,9 @@ public class Funcionario extends Pessoa{
      * Método responsável por retornar a data de contratação de um objeto funcionario no formato texto.
      * @return String
      */
-    public Date getDataContratacao() {
-        return dataContratacao;
+    public String getDataContratacao() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(dataContratacao);
     }
     
     /**
@@ -56,7 +57,7 @@ public class Funcionario extends Pessoa{
      * @param data 
      */
     public void setDataContratacao(String data) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             //Parsing the String
             this.dataContratacao = dateFormat.parse(data);
