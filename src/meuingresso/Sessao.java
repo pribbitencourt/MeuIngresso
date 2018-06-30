@@ -13,16 +13,25 @@ import java.util.logging.Logger;
 public class Sessao {
     
     private int id;
+    private String nome_sessao;
     private Date dataInicio= null;
     private Date dataFim= null;
     private String horario;
     
-    public Sessao(int id, String dataInicioString, String dataFimString, String horario){
-        this.id= id;
+    public Sessao(String nome_sessao, String dataInicioString, String dataFimString, String horario){
+        this.nome_sessao = nome_sessao;
         this.setDataInicio(dataInicioString);
         this.setDataFim(dataFimString);
         this.horario=horario;
     
+    }
+
+    public String getNome_sessao() {
+        return nome_sessao;
+    }
+
+    public void setNome_sessao(String nome_sessao) {
+        this.nome_sessao = nome_sessao;
     }
 
     public int getId() {

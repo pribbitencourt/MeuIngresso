@@ -18,11 +18,10 @@ public class Filme {
     private String legenda;
     private String idioma;
 
-    public Filme(int id, String titulo, String genero, String duracao
+    public Filme(String titulo, String genero, String duracao
             , String produtora, String classificacao, String diretor
             , String atoresPrincipais, String sinopse, String legenda
             , String idioma) {
-        this.id = id;
         this.titulo = titulo;
         this.genero = genero;
         this.duracao = duracao;

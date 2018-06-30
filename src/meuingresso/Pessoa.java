@@ -13,8 +13,7 @@ public abstract class Pessoa {
     private String telefone;
     private Date dataNascimento = null;
 
-    public Pessoa(int id, String nome, String cpf, String email, String telefone, String dataNascimento) {
-        this.id = id;
+    public Pessoa(String nome, String cpf, String email, String telefone, String dataNascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;

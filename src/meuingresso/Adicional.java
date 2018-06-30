@@ -4,10 +4,14 @@ package meuingresso;
  *
  * @author priscillabittencourt
  */
-public class Adicional {
+public class Adicional extends Produto {
     
     private String tipo;
     private String categoria;
+
+    public Adicional(int id, String descricao, float valor) {
+        super(id, descricao, valor);
+    }
 
     public String getTipo() {
         return tipo;

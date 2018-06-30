@@ -11,8 +11,7 @@ public class Sala {
     private String numeroSala;
     private String tipoSala;
     
-    public Sala(int id, int numeroAssentos, String numeroSala, String tipoSala){
-        this.id = id;
+    public Sala(int numeroAssentos, String numeroSala, String tipoSala){
         this.numeroAssentos = numeroAssentos;
         this.numeroSala = numeroSala;
         this.tipoSala = tipoSala;
@@ -49,4 +48,10 @@ public class Sala {
     public void setTipoSala(String tipoSala) {
         this.tipoSala = tipoSala;
     }   
+
+    @Override
+    public String toString() {
+        return "Sala{" + "id=" + id + ", numeroAssentos=" + numeroAssentos + ", numeroSala=" + numeroSala + ", tipoSala=" + tipoSala + '}';
+    }
+    
 }

@@ -25,12 +25,11 @@ public class FuncionarioDAOPG implements FuncionarioDAO {
 
     @Override
     public void create(Funcionario f) throws SQLException {
-        PessoaDAOPG pdpg = new PessoaDAOPG();
-        pdpg.create(f);
+
         try {
             Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
             PreparedStatement pstm = conn.prepareStatement("INSERT INTO funcionario("
-                    + "id"
+                    + "id "
                     + ", turno"
                     + ", funcao"
                     + ", salario"
@@ -79,7 +78,7 @@ public class FuncionarioDAOPG implements FuncionarioDAO {
             String email = rsPessoa.getString("email");
             String telefone = rsPessoa.getString("telefone");
             String datanasc = rsPessoa.getString("data_nascimento");
-            listaFuncionarios.add(new Funcionario(turno, funcao, salario, id, nome, cpf, email, telefone, datanasc, dataContratacao ));
+            listaFuncionarios.add(new Funcionario(turno, funcao, salario, nome, cpf, email, telefone, datanasc, dataContratacao ));
         }
         return listaFuncionarios;
     }
@@ -114,6 +113,64 @@ public class FuncionarioDAOPG implements FuncionarioDAO {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public Funcionario retrieveOneByCPF(String cpf) throws SQLException {
+        Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
+        PreparedStatement pstmPessoa = conn.prepareStatement("select id,"
+                + " nome, "
+                    + "cpf, "
+                    + "email, "
+                    + "telefone, "
+                    + "data_nascimento "
+                    + "from pessoa WHERE cpf = ?");
+        pstmPessoa.setString(1, cpf);
+        ResultSet rsPessoa = pstmPessoa.executeQuery();
+        if (!rsPessoa.isBeforeFirst() ) {    
+          System.out.println("Funcionário não encontrado"); 
+          return null;
+        } 
+        rsPessoa.next();
+        int id = rsPessoa.getInt("id");
+        String nome = rsPessoa.getString("nome");
+        String cpf_funcionario = rsPessoa.getString("cpf");
+        String email = rsPessoa.getString("email");
+        String telefone = rsPessoa.getString("telefone");
+        String datanasc = rsPessoa.getString("data_nascimento");
+        
+        String sqlSelectFuncionario = "SELECT id,"
+                + "turno,"
+                + "funcao,"
+                + "salario,"
+                + "data_contratacao "
+                + " FROM funcionario"
+                + " WHERE id = ?";
+        PreparedStatement pstm = conn.prepareStatement(sqlSelectFuncionario);
+        pstm.setInt(1, id);
+        ResultSet rsFuncionario = pstm.executeQuery();
+        if (!rsFuncionario.isBeforeFirst() ) {    
+          System.out.println("Funcionário não encontrado"); 
+          return null;
+        } 
+        rsFuncionario.next();
+        String turno = rsFuncionario.getString("turno");
+        String funcao = rsFuncionario.getString("funcao");
+        Float salario = rsFuncionario.getFloat("salario");   
+        String datacontratacao = rsFuncionario.getString("data_contratacao");   
+            
+        Funcionario funcionario = new Funcionario(
+                turno
+                , funcao
+                , salario
+                , nome
+                , cpf_funcionario
+                , email
+                , telefone
+                , datanasc
+                , datacontratacao);
+        funcionario.setId(id);
+        
+        return funcionario;
     }
     
 }

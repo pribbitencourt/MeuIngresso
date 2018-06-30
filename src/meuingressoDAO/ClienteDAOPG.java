@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import meuingresso.Cliente;
+import meuingresso.Funcionario;
 
 /**
  *
@@ -27,12 +28,10 @@ public class ClienteDAOPG implements ClienteDAO {
 
     @Override
     public void create(Cliente c) throws SQLException {
-        PessoaDAOPG pdpg = new PessoaDAOPG();
-        pdpg.create(c);
         try {
             Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
             PreparedStatement pstm = conn.prepareStatement("INSERT INTO cliente("
-                    + "id"
+                    + "id "
                     + ", cpf"
                     + ", data_nascimento"
                     + ", email"
@@ -65,7 +64,7 @@ public class ClienteDAOPG implements ClienteDAO {
             String email = rsCliente.getString("email");
             String nome = rsCliente.getString("nome"); 
             String telefone = rsCliente.getString("telefone"); 
-            listaClientes.add(new Cliente(id, nome, cpf, email, telefone, dataNascimento));
+            listaClientes.add(new Cliente(nome, cpf, email, telefone, dataNascimento));
         }
         return listaClientes;
     }
@@ -103,6 +102,56 @@ public class ClienteDAOPG implements ClienteDAO {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public Cliente retrieveOneByCPF(String cpf) throws SQLException {
+        Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
+        PreparedStatement pstmPessoa = conn.prepareStatement("select id,"
+                + " nome, "
+                    + "cpf, "
+                    + "email, "
+                    + "telefone, "
+                    + "data_nascimento "
+                    + "from pessoa WHERE cpf = ?");
+        pstmPessoa.setString(1, cpf);
+        ResultSet rsPessoa = pstmPessoa.executeQuery();
+        if (!rsPessoa.isBeforeFirst() ) {    
+          System.out.println("Cliente não encontrado"); 
+          return null;
+        } 
+        rsPessoa.next();
+        int id = rsPessoa.getInt("id");
+        
+        String sqlSelectCliente = "SELECT id,"
+                + "nome,"
+                + "cpf,"
+                + "email,"
+                + "telefone, "
+                + "data_nascimento"
+                + " FROM cliente"
+                + " WHERE id = ?";
+        PreparedStatement pstm = conn.prepareStatement(sqlSelectCliente);
+        pstm.setInt(1, id);
+        ResultSet rsCliente = pstm.executeQuery();
+        if (!rsCliente.isBeforeFirst() ) {    
+          System.out.println("Cliente não encontrado"); 
+          return null;
+        } 
+        rsCliente.next();
+        String nome_cliente = rsCliente.getString("nome");
+        String cpf_cliente = rsCliente.getString("cpf");
+        String email_cliente = rsCliente.getString("email");   
+        String telefone_cliente = rsCliente.getString("telefone");   
+        String datanasc_cliente = rsCliente.getString("data_nascimento");   
+            
+        Cliente cliente = new Cliente(nome_cliente
+                , cpf_cliente
+                , email_cliente
+                , telefone_cliente
+                , datanasc_cliente);
+        cliente.setId(id);
+        
+        return cliente;
     }
     
 }

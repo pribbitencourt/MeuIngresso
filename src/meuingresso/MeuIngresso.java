@@ -24,10 +24,9 @@ public class MeuIngresso {
 
     
     public static void main(String[] args) throws SQLException, ParseException {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/YYYY");
 // CREATE
 //        Cliente c1 = new Cliente(3, "Arthur Alves Venturin", "071.592.159-23"
-//                , "arthur.alves.venturin@gmail.com", "33237502", formato.parse("13/10/1991"));
+//                , "arthur.alves.venturin@gmail.com", "33237502", "13/10/1991");
 //        ClienteDAOPG ClienteDAO = new ClienteDAOPG();
 //        ClienteDAO.create(c1);
 // RETRIEVE
@@ -36,12 +35,12 @@ public class MeuIngresso {
 // UPDATE
 //          ClienteDAOPG ClienteDAO = new ClienteDAOPG();
 //          Cliente c1 = new Cliente(1, "Priscilla", "082.627.869-80"
-//                , "Pribb@gmail.com", "999721918", formato.parse("12/11/1991"));
+//                , "Pribb@gmail.com", "999721918", "12/11/1991");
 //          ClienteDAO.update(c1);
 // DELETE
 //          ClienteDAOPG ClienteDAO = new ClienteDAOPG();
 //          Cliente c1 = new Cliente(3, "Priscilla", "082.627.869-80"
-//                , "Pribb@gmail.com", "999721918", formato.parse("12/11/1991"));
+//                , "Pribb@gmail.com", "999721918", "12/11/1991");
 //          ClienteDAO.delete(c1);
 // FILME
 // CREATE
@@ -69,7 +68,7 @@ public class MeuIngresso {
 //          FilmeDAO.delete(f1);
 //FUNCIONARIO
 // CREATE
-//        Funcionario func1 = new Funcionario("matutino/vespertino", "caixa", 500, 1, "Arthur", "000.000.000-00", "a@a.com.br", "33230931", formato.parse("10/10/1991"), formato.parse("10/10/1991"));
+//        Funcionario func1 = new Funcionario("matutino/vespertino", "caixa", 500, 1, "Arthur", "000.000.000-00", "a@a.com.br", "33230931", "10/10/1991", "10/10/1991");
 //        FuncionarioDAOPG FuncionarioDAO = new FuncionarioDAOPG();
 //        FuncionarioDAO.create(func1);
 // RETRIEVE
@@ -99,6 +98,27 @@ public class MeuIngresso {
 //        Sessao sessao1 = new Sessao(1, "10/10/1991", "12/10/1991", "19:00");
 //        SessaoDAOPG SessaoDAO = new SessaoDAOPG();
 //        SessaoDAO.delete(sessao1);
+
+        Cliente c1 = new Cliente("Arthur Alves Venturin", "071.592.159-23"
+                , "arthur.alves.venturin@gmail.com", "33237502", "13/10/1991");
+        ClienteDAOPG ClienteDAO = new ClienteDAOPG();
+        ClienteDAO.create(c1);
+        
+//        Funcionario func1 = new Funcionario("matutino/vespertino", "caixa", 500, 11, "Arthur", "000.000.000-00", "a@a.com.br", "33230931", "10/10/1991", "10/10/1991");
+//        FuncionarioDAOPG FuncionarioDAO = new FuncionarioDAOPG();
+//        FuncionarioDAO.create(func1);
+//       
+//        Venda v1 = new Venda(c1,func1, "Débito");
+//        v1.addProdutoCarrinhoDeCompras(new Adicional(1,"Pipoca", 30));
+//        v1.addProdutoCarrinhoDeCompras(
+//                new Ingresso(2, "Vingadores: Guerra infinita", 20,
+//                new Filme(1, "Vingadores Guerra Infinita", "Ação", "120min", "Marvel", "+10", "kd", "Tony Stark", "bla bla", "bla bla", "bla bla"),
+//                new Sala(1, 1, "Sala 3", "3D"), 
+//                new Sessao(1, "10/02/2018", "10/02/2018", "18:00")
+//                ));
+//        System.out.println(v1.getValorTotalVenda());
+        
+
     }
     
 }

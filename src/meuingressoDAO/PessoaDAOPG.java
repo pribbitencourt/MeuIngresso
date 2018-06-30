@@ -8,8 +8,10 @@ package meuingressoDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import meuingresso.Funcionario;
 import meuingresso.Pessoa;
 
 /*
@@ -29,13 +31,12 @@ public class PessoaDAOPG implements PessoaDAO{
     public void create(Pessoa p) throws SQLException {
         try {
             Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
-            PreparedStatement pstm = conn.prepareStatement("INSERT INTO pessoa(id, cpf, data_nascimento,email, nome, telefone) VALUES (?,?,?,?,?,?)");
-            pstm.setInt(1, p.getId());
-            pstm.setString(2, p.getCpf());
-            pstm.setString(3, p.getDataNascimento());
-            pstm.setString(4, p.getEmail());
-            pstm.setString(5, p.getNome());
-            pstm.setString(6, p.getTelefone());
+            PreparedStatement pstm = conn.prepareStatement("INSERT INTO pessoa(cpf, data_nascimento,email, nome, telefone) VALUES (?,?,?,?,?)");
+            pstm.setString(1, p.getCpf());
+            pstm.setString(2, p.getDataNascimento());
+            pstm.setString(3, p.getEmail());
+            pstm.setString(4, p.getNome());
+            pstm.setString(5, p.getTelefone());
             pstm.execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -49,7 +50,19 @@ public class PessoaDAOPG implements PessoaDAO{
 
     @Override
     public void update(Pessoa p) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
+            PreparedStatement pstm = conn.prepareStatement("UPDATE pessoa SET cpf = ?, data_nascimento = ?,email = ?, nome = ?, telefone = ? WHERE cpf = ?");
+            pstm.setString(1, p.getCpf());
+            pstm.setString(2, p.getDataNascimento());
+            pstm.setString(3, p.getEmail());
+            pstm.setString(4, p.getNome());
+            pstm.setString(5, p.getTelefone());
+            pstm.setString(6, p.getCpf());
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
@@ -62,6 +75,20 @@ public class PessoaDAOPG implements PessoaDAO{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    public int retrieveIdPessoaByCPF(String cpf) throws SQLException {
+        Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cinema","postgres","Rosabusin12");
+        PreparedStatement pstmPessoa = conn.prepareStatement("select id from pessoa WHERE cpf = ?");
+        pstmPessoa.setString(1, cpf);
+        ResultSet rsPessoa = pstmPessoa.executeQuery();
+        if (!rsPessoa.isBeforeFirst() ) {    
+          System.out.println("Pessoa não encontrada"); 
+          return 0;
+        } 
+        rsPessoa.next();
+        int id = rsPessoa.getInt("id");
+        return id;
     }
     
 }
