@@ -5,28 +5,23 @@
  */
 package meuingresso.view;
 
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import meuingresso.Sala;
-import meuingresso.Sessao;
-import meuingressoDAO.SalaDAOPG;
-import meuingressoDAO.SessaoDAOPG;
+import javax.swing.JTextField;
+import meuingresso.Controller.SessaoController;
 
 /**
  *
  * @author priscillabittencourt
  */
 public class JFCadastroSessao extends javax.swing.JFrame {
-
+    private SessaoController controller;
     /**
-     * Creates new form JFCadastrarCliente
+     * Creates new form JFCadastroSessao
      */
     public JFCadastroSessao() {
         initComponents();
-        jButtonCadastrar.setVisible(false);
-        jButtonEditar.setVisible(false);
-        jButtonExcluir.setVisible(false);
+        controller = new SessaoController(this);
     }
 
     /**
@@ -38,172 +33,95 @@ public class JFCadastroSessao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldDataInicio = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButtonCadastrar = new javax.swing.JButton();
-        jTextFieldNomeSessao = new javax.swing.JTextField();
-        jButtonPesquisar = new javax.swing.JButton();
-        jTextFieldDataFim = new javax.swing.JTextField();
-        jTextFieldHorario = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabelNotificacao = new javax.swing.JLabel();
-        jButtonEditar = new javax.swing.JButton();
-        jButtonExcluir = new javax.swing.JButton();
-
-        jLabel8.setText("CPF");
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Data Inico");
+        JTNomeSessao = new javax.swing.JTextField();
+        JTDataInicio = new javax.swing.JTextField();
+        JTDataFim = new javax.swing.JTextField();
+        JBSalvar = new javax.swing.JButton();
+        JLNotificacao = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        JTHorario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(196, 170, 170));
+        jLabel1.setText("Cadastro de sessão");
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel1.setText("Cadastro Sessão");
+        jLabel2.setText("Nome da sessão");
 
-        jLabel2.setText("Data Inicio");
+        jLabel3.setText("Data de início");
 
-        jTextFieldDataInicio.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setText("Data de fim");
+
+        JTNomeSessao.setColumns(20);
+
+        JTDataInicio.setColumns(10);
+
+        JTDataFim.setColumns(10);
+
+        JBSalvar.setText("Salvar");
+        JBSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldDataInicioActionPerformed(evt);
+                JBSalvarActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Data Fim");
-
-        jLabel4.setText("Nome");
-
-        jButtonCadastrar.setText("Cadastrar");
-        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadastrarActionPerformed(evt);
-            }
-        });
-
-        jTextFieldNomeSessao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeSessaoActionPerformed(evt);
-            }
-        });
-
-        jButtonPesquisar.setText("Pesquisar");
-        jButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPesquisarActionPerformed(evt);
-            }
-        });
-
-        jTextFieldDataFim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldDataFimActionPerformed(evt);
-            }
-        });
-
-        jTextFieldHorario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldHorarioActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("Horário");
-
-        jButtonEditar.setText("Editar");
-        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarActionPerformed(evt);
-            }
-        });
-
-        jButtonExcluir.setText("Excluir");
-        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcluirActionPerformed(evt);
-            }
-        });
+        jLabel5.setText("Horário");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(jButtonCadastrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonExcluir))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel4)
-                                            .addGap(0, 0, Short.MAX_VALUE))
-                                        .addComponent(jTextFieldNomeSessao))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButtonPesquisar))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jTextFieldDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jTextFieldHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextFieldDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel3)))
-                                .addComponent(jLabelNotificacao, javax.swing.GroupLayout.Alignment.LEADING)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(JBSalvar)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(JTNomeSessao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(JTDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(JTHorario, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JTDataFim, javax.swing.GroupLayout.Alignment.LEADING)))))
+                    .addComponent(JLNotificacao)
+                    .addComponent(jLabel5))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelNotificacao)
-                .addGap(2, 2, 2)
-                .addComponent(jLabel4)
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNomeSessao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPesquisar))
-                .addGap(7, 7, 7)
+                .addComponent(JLNotificacao)
+                .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(JTNomeSessao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel3)
+                    .addComponent(JTDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCadastrar)
-                    .addComponent(jButtonEditar)
-                    .addComponent(jButtonExcluir))
-                .addGap(30, 30, 30))
+                    .addComponent(jLabel4)
+                    .addComponent(JTDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(JTHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(JBSalvar)
+                .addGap(80, 80, 80))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -220,97 +138,16 @@ public class JFCadastroSessao extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldDataInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDataInicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldDataInicioActionPerformed
-
-    private void jTextFieldNomeSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeSessaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNomeSessaoActionPerformed
-
-    private void jTextFieldDataFimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDataFimActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldDataFimActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextFieldHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHorarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldHorarioActionPerformed
-
-    private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-        SessaoDAOPG sessaoDAO = new SessaoDAOPG();
+    private void JBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBSalvarActionPerformed
         try {
-            if(sessaoDAO.retrieveOneByNome(jTextFieldNomeSessao.getText()) == null){
-                jTextFieldDataInicio.setText("");
-                jTextFieldDataFim.setText("");
-                jTextFieldHorario.setText("");
-                jLabelNotificacao.setText("! - Sessao não localizada.");
-                jButtonCadastrar.setVisible(true);
-                jButtonEditar.setVisible(false);
-                jButtonExcluir.setVisible(false);
-            }else{
-                Sessao sessao = sessaoDAO.retrieveOneByNome(jTextFieldNomeSessao.getText());
-                jTextFieldNomeSessao.setText(sessao.getNome_sessao());
-                jTextFieldDataInicio.setText(sessao.getDataInicio());
-                jTextFieldDataFim.setText(sessao.getDataFim());
-                jTextFieldHorario.setText(sessao.getHorario());
-                jLabelNotificacao.setText("OK - Sessao localizada.");
-                jButtonCadastrar.setVisible(false);
-                jButtonEditar.setVisible(true);
-                jButtonExcluir.setVisible(true);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(JFCadastroSala.class.getName()).log(Level.SEVERE, null, ex);
+            JLNotificacao.setText("");
+            controller.insert();
+            LimpaCampos();
+            JLNotificacao.setText("Sessão salva com sucesso!");
+        } catch (Exception ex) {
+            System.out.println("ERRO: " + ex.getMessage());
         }
-    }//GEN-LAST:event_jButtonPesquisarActionPerformed
-
-    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-       SessaoDAOPG sessaoDAO = new SessaoDAOPG();
-        try {
-            Sessao sessao = sessaoDAO.retrieveOneByNome(jTextFieldNomeSessao.getText());
-            sessao.setNome_sessao(jTextFieldNomeSessao.getText());
-            sessao.setDataInicio(jTextFieldDataInicio.getText());
-            sessao.setDataFim(jTextFieldDataFim.getText());
-            sessao.setHorario(jTextFieldHorario.getText());
-            sessaoDAO.update(sessao);
-            jLabelNotificacao.setText("OK - Dados da sessao atualizados com sucesso!");
-        } catch (SQLException ex) {
-            Logger.getLogger(JFCadastroSala.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButtonEditarActionPerformed
-
-    private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        SessaoDAOPG sessaoDAO = new SessaoDAOPG();
-        try {
-            Sessao sessao = new Sessao(jTextFieldNomeSessao.getText(), jTextFieldDataInicio.getText(), jTextFieldDataFim.getText(), jTextFieldHorario.getText());
-            System.out.println(sessao);
-            sessaoDAO.create(sessao);
-            jLabelNotificacao.setText("OK - Sessao cadastrada com sucesso!");
-        } catch (SQLException ex) {
-            Logger.getLogger(JFCadastroSala.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButtonCadastrarActionPerformed
-
-    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-       SessaoDAOPG sessaoDAO = new SessaoDAOPG();
-        try {
-            Sessao sessao = sessaoDAO.retrieveOneByNome(jTextFieldNomeSessao.getText());
-            sessaoDAO.delete(sessao);
-            jLabelNotificacao.setText("OK - Sessao deletada com sucesso!");
-            jButtonEditar.setVisible(false);
-            jButtonExcluir.setVisible(false);
-            jButtonCadastrar.setVisible(false);
-            jTextFieldNomeSessao.setText("");
-            jTextFieldDataFim.setText("");
-            jTextFieldDataInicio.setText("");
-            jTextFieldHorario.setText("");
-        } catch (SQLException ex) {
-            Logger.getLogger(JFCadastroSala.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButtonExcluirActionPerformed
+    }//GEN-LAST:event_JBSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,9 +175,6 @@ public class JFCadastroSessao extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(JFCadastroSessao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -349,25 +183,39 @@ public class JFCadastroSessao extends javax.swing.JFrame {
             }
         });
     }
-
+    private void LimpaCampos(){
+        JTNomeSessao.setText("");
+        JTDataInicio.setText("");
+        JTDataFim.setText("");
+        JTHorario.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCadastrar;
-    private javax.swing.JButton jButtonEditar;
-    private javax.swing.JButton jButtonExcluir;
-    private javax.swing.JButton jButtonPesquisar;
+    private javax.swing.JButton JBSalvar;
+    private javax.swing.JLabel JLNotificacao;
+    private javax.swing.JTextField JTDataFim;
+    private javax.swing.JTextField JTDataInicio;
+    private javax.swing.JTextField JTHorario;
+    private javax.swing.JTextField JTNomeSessao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabelNotificacao;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextFieldDataFim;
-    private javax.swing.JTextField jTextFieldDataInicio;
-    private javax.swing.JTextField jTextFieldHorario;
-    private javax.swing.JTextField jTextFieldNomeSessao;
     // End of variables declaration//GEN-END:variables
+
+    public JTextField getJTNomeSessao() {
+        return JTNomeSessao;
+    }
+
+    public JTextField getJTDataInicio() {
+        return JTDataInicio;
+    }
+
+    public JTextField getJTDataFim() {
+        return JTDataFim;
+    }
+    public JTextField getJTHorario(){
+        return JTHorario;
+    }
 }

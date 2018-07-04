@@ -5,30 +5,20 @@
  */
 package meuingresso.view;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JLabel;
-import meuingresso.Sala;
-import meuingressoDAO.SalaDAOPG;
+import javax.swing.JTextField;
+import meuingresso.Controller.SalaController;
 
 /**
  *
  * @author priscillabittencourt
  */
 public class JFCadastroSala extends javax.swing.JFrame {
-
-    /**
-     * Creates new form JFCadastrarCliente
-     */
-    public JFCadastroSala() {
+    private SalaController controller;
+    
+    public JFCadastroSala(){
         initComponents();
-        jButtonCadastrar.setVisible(false);
-        jButtonEditar.setVisible(false);
-        jButtonExcluir.setVisible(false);
+        controller = new SalaController(this);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,89 +28,47 @@ public class JFCadastroSala extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldNumeroAssentos = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButtonCadastrar = new javax.swing.JButton();
-        jTextFieldNomeSala = new javax.swing.JTextField();
-        jButtonPesquisar = new javax.swing.JButton();
-        jTextFieldTipoSala = new javax.swing.JTextField();
-        jButtonEditar = new javax.swing.JButton();
-        jButtonExcluir = new javax.swing.JButton();
-        jLabelNotificacao = new javax.swing.JLabel();
-
-        jLabel8.setText("CPF");
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Data Inico");
+        JTNomeDaSala = new javax.swing.JTextField();
+        JTTipoSala = new javax.swing.JTextField();
+        JTNumAssentos = new javax.swing.JTextField();
+        JBSalvar = new javax.swing.JButton();
+        JLNotificacao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(196, 170, 170));
+        jLabel1.setText("Cadastro de Salas de Cinema");
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel1.setText("Cadastro Sala");
+        jLabel2.setText("Nome da Sala");
 
-        jLabel2.setText("Numero Assentos");
+        jLabel3.setText("Tipo de Sala");
 
-        jTextFieldNumeroAssentos.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setText("Número de Assentos");
+
+        JTNomeDaSala.setColumns(20);
+        JTNomeDaSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNumeroAssentosActionPerformed(evt);
+                JTNomeDaSalaActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Tipo Sala");
-
-        jLabel4.setText("Nome Sala");
-
-        jButtonCadastrar.setText("Cadastrar");
-        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        JTTipoSala.setColumns(20);
+        JTTipoSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadastrarActionPerformed(evt);
+                JTTipoSalaActionPerformed(evt);
             }
         });
 
-        jTextFieldNomeSala.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeSalaActionPerformed(evt);
-            }
-        });
+        JTNumAssentos.setColumns(20);
 
-        jButtonPesquisar.setText("Pesquisar");
-        jButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
+        JBSalvar.setText("Salvar");
+        JBSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPesquisarActionPerformed(evt);
-            }
-        });
-
-        jTextFieldTipoSala.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldTipoSalaActionPerformed(evt);
-            }
-        });
-
-        jButtonEditar.setText("Editar");
-        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarActionPerformed(evt);
-            }
-        });
-
-        jButtonExcluir.setText("Excluir");
-        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcluirActionPerformed(evt);
+                JBSalvarActionPerformed(evt);
             }
         });
 
@@ -129,64 +77,52 @@ public class JFCadastroSala extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(jButtonCadastrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonEditar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonExcluir))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JTTipoSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JTNomeDaSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(JBSalvar)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel4)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jTextFieldNomeSala))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonPesquisar))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jTextFieldNumeroAssentos, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldTipoSala, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3)))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNotificacao, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(JTNumAssentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(JLNotificacao))
+                        .addGap(0, 1, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelNotificacao)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel4)
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNomeSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPesquisar))
-                .addGap(7, 7, 7)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                .addGap(3, 3, 3)
+                .addComponent(JLNotificacao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNumeroAssentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldTipoSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel2)
+                    .addComponent(JTNomeDaSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCadastrar)
-                    .addComponent(jButtonEditar)
-                    .addComponent(jButtonExcluir))
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addComponent(JTTipoSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(JTNumAssentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JBSalvar)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,137 +139,84 @@ public class JFCadastroSala extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldNumeroAssentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNumeroAssentosActionPerformed
+    private void JTNomeDaSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTNomeDaSalaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNumeroAssentosActionPerformed
+    }//GEN-LAST:event_JTNomeDaSalaActionPerformed
 
-    private void jTextFieldNomeSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeSalaActionPerformed
+    private void JTTipoSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTTipoSalaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNomeSalaActionPerformed
+    }//GEN-LAST:event_JTTipoSalaActionPerformed
 
-    private void jTextFieldTipoSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTipoSalaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldTipoSalaActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-        SalaDAOPG salaDAO = new SalaDAOPG();
+    private void JBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBSalvarActionPerformed
         try {
-            if(salaDAO.retrieveOneByNome(jTextFieldNomeSala.getText()) == null){
-                jTextFieldNumeroAssentos.setText("");
-                jTextFieldTipoSala.setText("");
-                jLabelNotificacao.setText("! - Sala não localizada.");
-                jButtonEditar.setVisible(false);
-                jButtonExcluir.setVisible(false);
-                jButtonCadastrar.setVisible(true);
-            }else{
-                Sala sala = salaDAO.retrieveOneByNome(jTextFieldNomeSala.getText());
-                jTextFieldNomeSala.setText(sala.getNumeroSala());
-                jTextFieldNumeroAssentos.setText(String.valueOf(sala.getNumeroAssentos()));
-                jTextFieldTipoSala.setText(sala.getTipoSala());
-                jLabelNotificacao.setText("OK - Sala localizada.");
-                jButtonEditar.setVisible(true);
-                jButtonExcluir.setVisible(true);
-                jButtonCadastrar.setVisible(false);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(JFCadastroSala.class.getName()).log(Level.SEVERE, null, ex);
+            JLNotificacao.setText("");
+            controller.insert();
+            LimpaCampos();
+            JLNotificacao.setText("Sala de cinema salva com sucesso!");
+        } catch (Exception ex) {
+            System.out.println("ERRO: " + ex.getMessage());
         }
-    }//GEN-LAST:event_jButtonPesquisarActionPerformed
-
-    private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        SalaDAOPG salaDAO = new SalaDAOPG();
-        try {
-            Sala sala = new Sala(Integer.parseInt(
-                    jTextFieldNumeroAssentos.getText()), 
-                    jTextFieldNomeSala.getText() , 
-                    jTextFieldTipoSala.getText());
-            System.out.println(sala);
-            salaDAO.create(sala);
-            jLabelNotificacao.setText("OK - Sala cadastrada com sucesso!");
-            jTextFieldNumeroAssentos.setText("");
-            jTextFieldNomeSala.setText("");
-            jTextFieldTipoSala.setText("");
-            jButtonEditar.setVisible(false);
-            jButtonExcluir.setVisible(false);
-            jButtonCadastrar.setVisible(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(JFCadastroSala.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButtonCadastrarActionPerformed
-
-    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        SalaDAOPG salaDAO = new SalaDAOPG();
-        try {
-            Sala sala = salaDAO.retrieveOneByNome(jTextFieldNomeSala.getText());
-            sala.setNumeroAssentos(Integer.parseInt(jTextFieldNumeroAssentos.getText()));
-            sala.setNumeroSala(jTextFieldNomeSala.getText());
-            sala.setTipoSala(jTextFieldTipoSala.getText());
-            salaDAO.update(sala);
-            jLabelNotificacao.setText("OK - Dados da sala atualizados com sucesso!");
-            jTextFieldNumeroAssentos.setText("");
-            jTextFieldNomeSala.setText("");
-            jTextFieldTipoSala.setText("");
-            jButtonEditar.setVisible(false);
-            jButtonExcluir.setVisible(false);
-            jButtonCadastrar.setVisible(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(JFCadastroSala.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButtonEditarActionPerformed
-
-    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        SalaDAOPG salaDAO = new SalaDAOPG();
-        Sala sala;
-        try {
-            sala = salaDAO.retrieveOneByNome(jTextFieldNomeSala.getText());
-            salaDAO.delete(sala);
-            jLabelNotificacao.setText("OK - Sala deletada com sucesso!");
-            jButtonEditar.setVisible(false);
-            jButtonExcluir.setVisible(false);
-            jButtonCadastrar.setVisible(false);
-            jTextFieldNumeroAssentos.setText("");
-            jTextFieldNomeSala.setText("");
-            jTextFieldTipoSala.setText("");
-        } catch (SQLException ex) {
-            Logger.getLogger(JFCadastroSala.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButtonExcluirActionPerformed
+    }//GEN-LAST:event_JBSalvarActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       
-        
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(JFCadastroSala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(JFCadastroSala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(JFCadastroSala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(JFCadastroSala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JFCadastroSala().setVisible(true);
-                
             }
         });
     }
+    public void LimpaCampos(){
+        JTTipoSala.setText("");
+        JTNumAssentos.setText("");
+        JTNomeDaSala.setText("");
+    }
+    public JTextField getJTTipoSala(){
+        return JTTipoSala;
+    }
+    public JTextField getJTNumAssentos(){
+        return JTNumAssentos;
+    }
+    public JTextField getJTNomeDaSala(){
+        return JTNomeDaSala;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCadastrar;
-    private javax.swing.JButton jButtonEditar;
-    private javax.swing.JButton jButtonExcluir;
-    private javax.swing.JButton jButtonPesquisar;
+    private javax.swing.JButton JBSalvar;
+    private javax.swing.JLabel JLNotificacao;
+    private javax.swing.JTextField JTNomeDaSala;
+    private javax.swing.JTextField JTNumAssentos;
+    private javax.swing.JTextField JTTipoSala;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabelNotificacao;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextFieldNomeSala;
-    private javax.swing.JTextField jTextFieldNumeroAssentos;
-    private javax.swing.JTextField jTextFieldTipoSala;
     // End of variables declaration//GEN-END:variables
 }
